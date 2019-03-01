@@ -1,0 +1,4 @@
+include LICENSE requirements.txt
+recursive-include quantiphyse_sv *.pyx 
+recursive-include quantiphyse_sv/src *.c *.cpp *.h
+
