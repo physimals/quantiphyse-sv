@@ -9,3 +9,5 @@ packaging/licence.rtf
 .DS_Store
 _version.py
 *.so
+quantiphyse_sv/perfusionslic/**/*.cpp
+quantiphyse_sv/perfusionslic/**/*.c
