@@ -8,7 +8,7 @@ from PySide import QtGui
 
 from quantiphyse.gui.widgets import QpWidget, TitleWidget, Citation, OverlayCombo, RoiCombo, NumericOption
 
-from .process import SupervoxelsProcess, MeanValuesProcess
+from .process import SupervoxelsProcess
 
 CITE_TITLE = "maskSLIC: Regional Superpixel Generation with Application to Local Pathology Characterisation in Medical Images"
 CITE_AUTHOR = "Benjamin Irving"
