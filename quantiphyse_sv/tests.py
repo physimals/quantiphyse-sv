@@ -92,19 +92,6 @@ class PerfSlicWidgetTest(WidgetTest):
         self.assertTrue(np.all(sv[self.mask == 0] == 0))
         self.assertFalse(self.error)
 
-class MeanValuesProcessTest(ProcessTest):
-
-    def test3d(self):
-        yaml = """
-  - MeanValues:
-        data: data_3d
-        roi: mask
-        output-name: data_roi_mean
-"""
-        self.run_yaml(yaml)
-        self.assertEqual(self.status, Process.SUCCEEDED)
-        self.assertTrue("data_roi_mean" in self.ivm.data)
-
 class SupervoxelsProcessTest(ProcessTest):
 
     def test3d(self):

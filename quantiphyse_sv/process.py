@@ -67,27 +67,3 @@ class SupervoxelsProcess(Process):
         newroi = np.zeros(data.grid.shape)
         newroi[slices] = np.array(labels, dtype=np.int) + 1
         self.ivm.add(newroi, grid=data.grid, name=output_name, roi=True, make_current=True)
-
-class MeanValuesProcess(Process):
-    """
-    Create new data set by replacing voxel values with mean within each ROI region
-    """
-    PROCESS_NAME = "MeanValues"
-    
-    def __init__(self, ivm, **kwargs):
-        Process.__init__(self, ivm, **kwargs)
-
-    def run(self, options):
-        data = self.get_data(options)
-        roi = self.get_roi(options, data.grid)
-        output_name = options.pop('output-name', data.name + "_means")
-
-        in_data = data.raw()
-        out_data = np.zeros(in_data.shape)
-        for region in roi.regions:
-            if data.ndim > 3:
-                out_data[roi.raw() == region] = np.mean(in_data[roi.raw() == region], axis=0)
-            else:
-                out_data[roi.raw() == region] = np.mean(in_data[roi.raw() == region])
-
-        self.ivm.add(NumpyData(out_data, grid=data.grid, name=output_name), make_current=True)
