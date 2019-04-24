@@ -94,6 +94,9 @@ def get_extensions(rootdir):
 
     if sys.platform.startswith('win'):
         compile_args.append('/EHsc')
+    elif sys.platform.startswith('darwin'):
+        compile_args += ["-mmacosx-version-min=10.9"]
+        link_args += ["-stdlib=libc++", "-mmacosx-version-min=10.9"]
 
     extensions.append(Extension("%s.perfusionslic.additional.bspline_smoothing" % MODULE,
                                 sources=["%s/perfusionslic/additional/bspline_smoothing.pyx" % MODULE],
