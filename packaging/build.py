@@ -4,7 +4,7 @@ import shutil
 import subprocess
 import re
 
-package_name = "quantiphyse_fabber_sv"
+package_name = "quantiphyse_sv"
 
 def update_version(name, rootdir):
     # Full version includes the Git commit hash
