@@ -10,10 +10,6 @@ import sys
 
 from setuptools import setup
 from setuptools import find_packages
-from setuptools.extension import Extension
-
-from Cython.Build import cythonize
-from Cython.Distutils import build_ext
 
 import numpy
 
@@ -87,37 +83,6 @@ def get_package_data(rootdir):
         MODULE : glob.glob("%s/*.png" % MODULE) + glob.glob("%s/*.svg" % MODULE)
     }
 
-def get_extensions(rootdir):
-    extensions = []
-    compile_args = []
-    link_args = []
-
-    if sys.platform.startswith('win'):
-        compile_args.append('/EHsc')
-    elif sys.platform.startswith('darwin'):
-        compile_args += ["-mmacosx-version-min=10.9"]
-        link_args += ["-stdlib=libc++", "-mmacosx-version-min=10.9"]
-
-    extensions.append(Extension("%s.perfusionslic.additional.bspline_smoothing" % MODULE,
-                                sources=["%s/perfusionslic/additional/bspline_smoothing.pyx" % MODULE],
-                                include_dirs=[numpy.get_include()]))
-
-    extensions.append(Extension("%s.perfusionslic.additional.create_im" % MODULE,
-                                sources=["%s/perfusionslic/additional/create_im.pyx" % MODULE],
-                                include_dirs=[numpy.get_include()]))
-
-    extensions.append(Extension("%s.perfusionslic._slic_feat" % MODULE,
-                                sources=["%s/perfusionslic/_slic_feat.pyx" % MODULE],
-                                include_dirs=[numpy.get_include()]))
-
-    extensions.append(Extension("%s.perfusionslic.additional.processing" % MODULE,
-                                sources=["%s/perfusionslic/additional/processing.pyx" % MODULE,
-                                         "%s/src/processing.cpp" % MODULE],
-                                include_dirs=["%s/src/" % MODULE, numpy.get_include()],
-                                language="c++", extra_compile_args=compile_args, extra_link_args=link_args))
-    
-    return cythonize(extensions)
-
 module_dir = os.path.abspath(os.path.dirname(__file__))
 
 kwargs = {
@@ -134,7 +99,6 @@ kwargs = {
     'install_requires' : get_requirements(module_dir),
     'packages' : find_packages(),
     'package_data' : get_package_data(module_dir),
-    'ext_modules' : get_extensions(module_dir),
     'include_package_data' : True,
     'entry_points' : {
         'quantiphyse_plugins' : [
