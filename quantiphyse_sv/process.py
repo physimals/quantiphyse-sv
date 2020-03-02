@@ -39,6 +39,7 @@ class SupervoxelsProcess(Process):
         seed_type = options.get('seed-type', 'nplace')
         output_name = options.pop('output-name', "supervoxels")
         ncomp = options.pop('n-components', 3)
+        compactness = options.pop('compactness', 0.1)
 
         img = data.raw()
         slices = roi.get_bounding_box()
@@ -51,6 +52,7 @@ class SupervoxelsProcess(Process):
                                    seed_type=seed_type,
                                    recompute_seeds=recompute_seeds,
                                    n_pca_components=ncomp,
+                                   compactness=compactness,
                                    **options)
         newroi = np.zeros(data.grid.shape)
         newroi[slices] = np.array(labels, dtype=np.int) + 1
