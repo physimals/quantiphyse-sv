@@ -94,7 +94,7 @@ kwargs = {
     'url' : 'https://quantiphyse.readthedocs.io/',
     'author' : 'Martin Craig',
     'author_email' : 'martin.craig@eng.ox.ac.uk',
-    'license' : 'License granted by University of Oxford for use by academics carrying out research and not for use by consumers or commercial businesses. See LICENSE file for more details',
+    'license' : 'Apache-2.0',
     'setup_requires' : ['cython'],
     'install_requires' : get_requirements(module_dir),
     'packages' : find_packages(),
@@ -111,7 +111,7 @@ kwargs = {
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Topic :: Scientific/Engineering :: Bio-Informatics',
-        'License :: Free for non-commercial use',
+        'License :: OSI Approved :: Apache Software License',
     ],
 }
 
