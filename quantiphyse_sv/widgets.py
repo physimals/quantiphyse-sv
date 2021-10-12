@@ -16,10 +16,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 """
 
-try:
-    from PySide import QtGui, QtCore, QtGui as QtWidgets
-except ImportError:
-    from PySide2 import QtGui, QtCore, QtWidgets
+from PySide2 import QtGui, QtCore, QtWidgets
 
 from quantiphyse.gui.widgets import QpWidget, TitleWidget, Citation, OverlayCombo, RoiCombo, NumericOption
 
@@ -39,7 +36,7 @@ class PerfSlicWidget(QpWidget):
                                              group="Clustering", **kwargs)
         
     def init_ui(self):
-        layout = QtGui.QVBoxLayout()
+        layout = QtWidgets.QVBoxLayout()
         self.setLayout(layout)
 
         title = TitleWidget(self, "Supervoxel Generation", help="sv")
@@ -48,17 +45,17 @@ class PerfSlicWidget(QpWidget):
         cite = Citation(CITE_TITLE, CITE_AUTHOR, CITE_JOURNAL)
         layout.addWidget(cite)
 
-        hbox = QtGui.QHBoxLayout()
-        optbox = QtGui.QGroupBox()
+        hbox = QtWidgets.QHBoxLayout()
+        optbox = QtWidgets.QGroupBox()
         optbox.setTitle("Options")
-        grid = QtGui.QGridLayout()
+        grid = QtWidgets.QGridLayout()
         optbox.setLayout(grid)
         
-        grid.addWidget(QtGui.QLabel("Data"), 0, 0)
+        grid.addWidget(QtWidgets.QLabel("Data"), 0, 0)
         self.ovl = OverlayCombo(self.ivm)
         self.ovl.currentIndexChanged.connect(self._data_changed)
         grid.addWidget(self.ovl, 0, 1)
-        grid.addWidget(QtGui.QLabel("ROI"), 1, 0)
+        grid.addWidget(QtWidgets.QLabel("ROI"), 1, 0)
         self.roi = RoiCombo(self.ivm)
         grid.addWidget(self.roi, 1, 1)
 
@@ -67,11 +64,11 @@ class PerfSlicWidget(QpWidget):
         self.sigma = NumericOption("Smoothing", grid, 4, minval=0, maxval=5, step=0.1, default=1, intonly=False)
         self.n_supervoxels = NumericOption("Number of supervoxels", grid, 5, minval=2, maxval=1000, default=20, intonly=True)
 
-        grid.addWidget(QtGui.QLabel("Output name"), 6, 0)
-        self.output_name = QtGui.QLineEdit("supervoxels")
+        grid.addWidget(QtWidgets.QLabel("Output name"), 6, 0)
+        self.output_name = QtWidgets.QLineEdit("supervoxels")
         grid.addWidget(self.output_name, 6, 1)
 
-        self.gen_btn = QtGui.QPushButton('Generate', self)
+        self.gen_btn = QtWidgets.QPushButton('Generate', self)
         self.gen_btn.clicked.connect(self._generate)
         grid.addWidget(self.gen_btn, 7, 0)
         hbox.addWidget(optbox)
