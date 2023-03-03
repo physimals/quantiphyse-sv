@@ -55,5 +55,5 @@ class SupervoxelsProcess(Process):
                                    compactness=compactness,
                                    **options)
         newroi = np.zeros(data.grid.shape)
-        newroi[slices] = np.array(labels, dtype=np.int) + 1
+        newroi[slices] = np.array(labels, dtype=np.int32) + 1
         self.ivm.add(newroi, grid=data.grid, name=output_name, roi=True, make_current=True)
